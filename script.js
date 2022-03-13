@@ -9,9 +9,9 @@ const handleSearch = () => {
     elementById("artist").textContent = ''
 };
 
-const showArtists = (data) => {
+const showArtists = ({artists}) => { // Destructuring {aritists} = data ; Here data is an object
   const artistContainer = elementById("artist");
-  data?.artists?.forEach((artist) => {
+  artists?.forEach((artist) => {
     const div = document.createElement("div");
     div.classList.add("artist-card");
     div.innerHTML = `<div class="image-container">
@@ -24,8 +24,8 @@ const showArtists = (data) => {
   </div>
   <div class="info-container">
     <h1>${artist.strArtist}</h1>
-    <p>Country: ${artist.strCountry}</p>
-    <p>Style: ${artist.strGenre}</p>
+    <p>Country: ${artist.strCountry ? artist.strCountry : 'Not Available'}</p>
+    <p>Style: ${artist.strGenre ? artist.strGenre : 'Not Available'}</p>
   </div>
   <button class="album-button">
     <i class="fa-solid fa-compact-disc"></i>
@@ -45,7 +45,6 @@ const fetchAlbums = (id) => {
 };
 
 const showAlbum = (data) => {
-  console.log(data)
   const albumContainer = elementById("albums");
   data.album.forEach((item) => {
     const div = document.createElement("div");
@@ -53,7 +52,7 @@ const showAlbum = (data) => {
     div.innerHTML = `
         <div class="album-image-container">
           <img
-            src="${item.strAlbumThumb}"
+            src="${item.strAlbumThumb ? item.strAlbumThumb : 'https://wallpapercave.com/wp/wp5836348.jpg'}"
             alt=""
           />
         </div>
