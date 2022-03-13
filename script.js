@@ -6,7 +6,8 @@ const handleSearch = () => {
   fetch(url)
     .then((res) => res.json())
     .then((data) => showArtists(data));
-    elementById("artist").textContent = ''
+  elementById("artist").textContent = ''
+  elementById("albums").textContent = ''
 };
 
 const showArtists = ({artists}) => { // Destructuring {aritists} = data ; Here data is an object
@@ -44,9 +45,9 @@ const fetchAlbums = (id) => {
   artistContainer.innerHTML = "";
 };
 
-const showAlbum = (data) => {
+const showAlbum = ({album}) => { //Destructuring...
   const albumContainer = elementById("albums");
-  data.album.forEach((item) => {
+  album.forEach((item) => {
     const div = document.createElement("div");
     div.classList.add("album");
     div.innerHTML = `
